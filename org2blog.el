@@ -105,7 +105,7 @@ All the other properties are optional. They over-ride the global variables.
 
 (defcustom org2blog/wp-buffer-template
   "#+DATE: %s
-#+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil
+#+OPTIONS: toc:t num:nil todo:nil pri:nil tags:nil ^:nil
 #+CATEGORY: %s
 #+TAGS:
 #+DESCRIPTION:
@@ -246,7 +246,7 @@ takes effect."
     :section-numbers nil
     :with-priority nil
     :with-sub-superscript nil
-    :with-toc nil
+    :with-toc t
     :with-tags nil
     :with-todo-keywords nil
     )
@@ -390,22 +390,23 @@ from currently logged in."
                org2blog/wp-server-userid
                                              org2blog/wp-server-pass
                org2blog/wp-server-blogid))
-          ;; Fetch and save tag list
-          org2blog/wp-tags-list
-    (mapcar (lambda (tag) (cdr (assoc "slug" tag)))
-      (wp-get-tags org2blog/wp-server-xmlrpc-url
-             org2blog/wp-server-userid
-                               org2blog/wp-server-pass
-             org2blog/wp-server-blogid))
+    ;;       ;; Fetch and save tag list
+    ;;       org2blog/wp-tags-list
+    ;; (mapcar (lambda (tag) (cdr (assoc "slug" tag)))
+    ;;   (wp-get-tags org2blog/wp-server-xmlrpc-url
+    ;;          org2blog/wp-server-userid
+    ;;                            org2blog/wp-server-pass
+    ;;          org2blog/wp-server-blogid))
           ;; Fetch and save page list
-          org2blog/wp-pages-list
-    (mapcar (lambda (pg)
-                    (cons (cdr (assoc "page_title" pg))
-                          (cdr (assoc "page_id" pg))))
-      (wp-get-pagelist org2blog/wp-server-xmlrpc-url
-           org2blog/wp-server-userid
-           org2blog/wp-server-pass
-           org2blog/wp-server-blogid)))
+    ;;       org2blog/wp-pages-list
+    ;; (mapcar (lambda (pg)
+    ;;                 (cons (cdr (assoc "page_title" pg))
+    ;;                       (cdr (assoc "page_id" pg))))
+    ;;   (wp-get-pagelist org2blog/wp-server-xmlrpc-url
+    ;;        org2blog/wp-server-userid
+    ;;        org2blog/wp-server-pass
+    ;;        org2blog/wp-server-blogid))
+    )
     (setq org2blog/wp-logged-in t)
     (message "Logged in")))
 
