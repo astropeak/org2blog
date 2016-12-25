@@ -1042,6 +1042,7 @@ various export options."
                   (org2blog/wp--export-as-html subtree-p export-options))
 
           ;; Return value
+          ;; (message "POST: %S" post)
           post)))))
 
 (defun org2blog/wp--get-parent-id (parent)
@@ -1094,6 +1095,7 @@ and munge it a little to make it suitable to use with the
                         (or (plist-get export-environment :title)
                             "No Title")))
          (cons "description" nil)
+         ;; cnblogs doesn't supprot tags
          (cons "tags"
                (split-string (or (org2blog/wp-get-option "TAGS") "")
                              "\\( *, *\\)" t))
@@ -1103,9 +1105,11 @@ and munge it a little to make it suitable to use with the
          (cons "post-id" (org2blog/wp-get-option "POSTID"))
          (cons "parent" (org2blog/wp--get-parent-id
                          (org2blog/wp-get-option "PARENT")))
+         ;; seems not work
          (cons "excerpt" (org-element-interpret-data
                           (or (plist-get export-environment
                                          :description) "")))
+         ;; (cons "mt_keywords" "aaaa, bbb")
          (cons "permalink" (or (org2blog/wp-get-option "PERMALINK") "")))))
 
     ;; Return value
